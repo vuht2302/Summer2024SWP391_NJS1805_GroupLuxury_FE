@@ -1,0 +1,78 @@
+{
+  "Category": [
+    {
+      "id": 1,
+      "name": "Kim Cuong"
+    },
+    {
+      "id": 2,
+      "name": "Vang"
+    },
+    {
+      "id": 3,
+      "name": "Bac"
+    },
+    {
+      "id": 4,
+      "name": "Da Quy"
+    }
+  ],
+  "Products": [
+    {
+      "id": 1,
+      "name": "Day Chuyen",
+      "price": 100,
+      "image": "https://cdn.pnj.io/images/detailed/72/gd0000y000830-day-chuyen-vang-18k-pnj-01.png",
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Nhan",
+      "price": 200,
+      "image": "https://lili.vn/wp-content/uploads/2022/06/Mat-day-chuyen-bac-nu-dinh-kim-cuong-Moissanite-tron-cach-dieu-LILI_413898_6.jpg",
+      "category_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Lac",
+      "price": 300,
+      "image": "https://btmc.vn/UserFiles/image/TS%20vang%20ta/27%20%20_%20%20%2010%20%20%20%20%20%20Hoangkimbao%20_%20%20%20Red%20label%20-%20kim%20hy%20-%200255.jpg",
+      "category_id": 3
+    },
+    {
+      "id": 4,
+      "name": "Vong co",
+      "price": 400,
+      "image": "https://lh5.googleusercontent.com/proxy/xlMk32Sn2GdATg75cgWTZVzOMtjp5oM0PPSjwMBLaAFW5-En06heCKZDWFoaKh1Yf9ugm9iReujgIUgLt_84KgojN1cAin31CJe2ak2Bl5_C5kuhKbYEeFJ2anzMsO8tl37qZ80ToRzPHNSf_sa9VRCidS0qFW0kR6hSWHdTD6Gdkpu5U2MpmYuzweU_jAZ_POr-yIs07f7h3gyoXltz83qLId_kCmsqYbdm",
+      "category_id": 4
+    },
+    {
+      "id": 1,
+      "name": "Day Chuyen",
+      "price": 100,
+      "image": "https://cdn.pnj.io/images/detailed/72/gd0000y000830-day-chuyen-vang-18k-pnj-01.png",
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Nhan",
+      "price": 200,
+      "image": "https://lili.vn/wp-content/uploads/2022/06/Mat-day-chuyen-bac-nu-dinh-kim-cuong-Moissanite-tron-cach-dieu-LILI_413898_6.jpg",
+      "category_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Lac",
+      "price": 300,
+      "image": "https://btmc.vn/UserFiles/image/TS%20vang%20ta/27%20%20_%20%20%2010%20%20%20%20%20%20Hoangkimbao%20_%20%20%20Red%20label%20-%20kim%20hy%20-%200255.jpg",
+      "category_id": 3
+    },
+    {
+      "id": 4,
+      "name": "Vong co",
+      "price": 400,
+      "image": "https://lh5.googleusercontent.com/proxy/xlMk32Sn2GdATg75cgWTZVzOMtjp5oM0PPSjwMBLaAFW5-En06heCKZDWFoaKh1Yf9ugm9iReujgIUgLt_84KgojN1cAin31CJe2ak2Bl5_C5kuhKbYEeFJ2anzMsO8tl37qZ80ToRzPHNSf_sa9VRCidS0qFW0kR6hSWHdTD6Gdkpu5U2MpmYuzweU_jAZ_POr-yIs07f7h3gyoXltz83qLId_kCmsqYbdm",
+      "category_id": 4
+    }
+  ]
+}
