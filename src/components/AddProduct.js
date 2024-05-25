@@ -44,6 +44,8 @@ const AddProduct = () => {
         description: "",
         price: "",
         category_ID: "",
+        condition_ID: "",
+        material_ID: "",
       });
     } else {
       setErrors(formErrors);
@@ -144,17 +146,6 @@ const AddProduct = () => {
           />
           {errors.price && <span style={styles.error}>{errors.catid}</span>}
         </div>{" "}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>Price:</label>
-          <input
-            type="text"
-            name="price"
-            value={product.price}
-            onChange={handleChange}
-            style={styles.input}
-          />
-          {errors.price && <span style={styles.error}>{errors.price}</span>}
-        </div>
         <div style={styles.formGroup}>
           <label style={styles.label}>category_ID:</label>
           <input

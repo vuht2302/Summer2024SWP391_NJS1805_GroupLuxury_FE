@@ -5,9 +5,6 @@ import HomeProduct from "./HomeProduct";
 export default function Main() {
   return (
     <div>
-      <div className="heading_container">
-        <h2>Our Jewellery Price</h2>
-      </div>
       <HomeSlider />
 
       <div className="item_section layout_padding2">
@@ -82,6 +79,9 @@ export default function Main() {
           </div>
         </div>
       </section>
+      <div className="heading_container">
+        <h2 style={{ paddingLeft: 100 }}>Our Jewellery Price</h2>
+      </div>
       <HomeProduct limit="4" />
 
       <section className="ring_section layout_padding">

@@ -1,4 +1,4 @@
-import { Routes, Router, Link, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Home/Main";
@@ -13,10 +13,37 @@ import CheckOut from "./components/CheckOut";
 import InventoryManager from "./components/InventoryManagement";
 import ManagerStaff from "./components/ManagerStaff";
 import AddProduct from "./components/AddProduct";
+import AdminHome from "./components/Admin/AdminHome";
+import { useContext, useEffect } from "react";
+import { UserContext } from "./Context/UserContext";
+
 function App() {
+  const location = useLocation();
+
+  // Define paths where Header and Footer should not be rendered
+  const noHeaderFooterPaths = [
+    "/AddProduct",
+    "/DashBoard",
+    "/ManagerStaff",
+    "/AdminHome",
+    "/Login",
+  ];
+  const { user, loginContext } = useContext(UserContext);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      loginContext(
+        localStorage.getItem("email"),
+        localStorage.getItem("token")
+      );
+    }
+  }, []);
+  const shouldRenderHeaderFooter = !noHeaderFooterPaths.includes(
+    location.pathname
+  );
+
   return (
     <div className="App">
-      <Header />
+      {shouldRenderHeaderFooter && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Login" element={<Login />} />
@@ -31,8 +58,9 @@ function App() {
         <Route path="/InventoryManager" element={<InventoryManager />} />
         <Route path="/ManagerStaff" element={<ManagerStaff />} />
         <Route path="/AddProduct" element={<AddProduct />} />
+        <Route path="/AdminHome" element={<AdminHome />} />
       </Routes>
-      <Footer />
+      {shouldRenderHeaderFooter && <Footer />}
     </div>
   );
 }

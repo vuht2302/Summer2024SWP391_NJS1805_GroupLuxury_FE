@@ -1,87 +1,106 @@
-import React from "react";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBInput,
-} from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Form, Container, Row, Col, InputGroup } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.css";
+import { loginApi } from "../service/UserService";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+const Login = () => {
+  const navigate = useNavigate();
+  const { loginContext } = useContext(UserContext);
 
-function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  // useEffect(() => {
+  //   let token = localStorage.getItem("token");
+  //   if (token) {
+  //     navigate("/");
+  //   }
+  // }, []);
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    // Example login logic, replace with actual API call
+    if (email && password) {
+      let res = await loginApi(email, password);
+      if (res && res.token) {
+        loginContext(email, res.token);
+        navigate("/");
+      } else {
+        if (res && res.status === 400) {
+          toast.error(res.data.error);
+        }
+      }
+    } else {
+      toast.error("Email/Password is required");
+      return;
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <MDBContainer className="my-5">
-      <MDBCard>
-        <MDBRow className="g-0">
-          <MDBCol md="6">
-            <MDBCardImage
-              src="https://static.vecteezy.com/system/resources/previews/008/903/410/non_2x/ring-shaped-jewelry-logo-template-free-vector.jpg"
-              alt="login form"
-              className="rounded-start w-100"
-            />
-          </MDBCol>
-          <MDBCol md="6">
-            <MDBCardBody className="d-flex flex-column">
-              {" "}
-              {/* Inline CSS for background color */}
-              <div className="d-flex flex-row mt-2">
-                <MDBIcon
-                  fas
-                  icon="cubes fa-3x me-3"
-                  style={{ color: "#ff6219" }}
-                />
-                <span className="h1 fw-bold mb-0">Jewelry Shop</span>
-              </div>
-              <h5
-                className="fw-normal my-4 pb-3"
-                style={{ letterSpacing: "1px" }}
-              >
-                Sign into your account
-              </h5>
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Email address"
-                id="formControlLg"
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col md={6}>
+          <h2 className="my-4 text-center">Login ( eve.holt@reqres.in ) </h2>
+          <Form onSubmit={handleLogin}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
                 type="email"
-                size="lg"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Password"
-                id="formControlLg"
-                type="password"
-                size="lg"
-              />
-              <MDBBtn className="mb-4 px-5" color="dark" size="lg">
-                Login
-              </MDBBtn>
-              <a className="small text-muted" href="#!">
-                Forgot password?
-              </a>
-              <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                Don't have an account?{" "}
-                <Link to="/Register" style={{ color: "#393f81" }}>
-                  Register here
-                </Link>
-              </p>
-              <div className="d-flex flex-row justify-content-start">
-                <a href="#!" className="small text-muted me-1">
-                  Terms of use.
-                </a>
-                <a href="#!" className="small text-muted">
-                  Privacy policy
-                </a>
-              </div>
-            </MDBCardBody>
-          </MDBCol>
-        </MDBRow>
-      </MDBCard>
-    </MDBContainer>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword" className="mt-3">
+              <Form.Label>Password</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </Button>
+              </InputGroup>
+            </Form.Group>
+
+            <Button variant="primary" type="submit" className="mt-4 w-100">
+              Login
+            </Button>
+            <div className="black">
+              <i className="fa-solid fa-angles-left"></i>
+              <Link to="/">Back</Link>
+            </div>
+          </Form>
+        </Col>
+      </Row>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </Container>
   );
-}
+};
 
 export default Login;
