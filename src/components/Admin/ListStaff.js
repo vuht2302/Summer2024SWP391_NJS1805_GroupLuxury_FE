@@ -4,6 +4,7 @@ import { fectchAllUser } from "../../service/UserService";
 import ReactPaginate from "react-paginate";
 import ModalAddNew from "./ModalAddNew";
 import ModalEditUser from "./ModalEditUser";
+import ModalConFirm from "./ModalConfirm";
 import _ from "lodash";
 const ListStaff = (props) => {
   const [listUser, setListUser] = useState([]);
@@ -12,9 +13,13 @@ const ListStaff = (props) => {
   const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [dataUserEdit, setDateUserEdit] = useState({});
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
+  const [dataUserDelete, setDataUserDelete] = useState({});
+
   const handleClose = () => {
     setIsShowModalAddNew(false);
     setIsShowModalEdit(false);
+    setIsShowModalDelete(false);
   };
   const handleUpdateTable = (user) => {
     setListUser([user, ...listUser]);
@@ -23,10 +28,20 @@ const ListStaff = (props) => {
     setDateUserEdit(user);
     setIsShowModalEdit(true);
   };
+  const handleDeleteUser = (user) => {
+    setIsShowModalDelete(true);
+    setDataUserDelete(user);
+  };
   const handleEditUserFormModal = (user) => {
     let cloneListUser = _.cloneDeep(listUser);
     let index = listUser.findIndex((item) => item.id === user.id);
     cloneListUser[index].first_name = user.first_name;
+    setListUser(cloneListUser);
+  };
+  // clone vi list user la const k thay doi duoc
+  const handleDeleteUserFormModal = (user) => {
+    let cloneListUser = _.cloneDeep(listUser);
+    cloneListUser = cloneListUser.filter((item) => item.id !== user.id);
     setListUser(cloneListUser);
   };
   useEffect(() => {
@@ -85,7 +100,12 @@ const ListStaff = (props) => {
                     >
                       Edit
                     </button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDeleteUser(item)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
@@ -123,6 +143,12 @@ const ListStaff = (props) => {
         dataUserEdit={dataUserEdit}
         handleClose={handleClose}
         handleEditUserFormModal={handleEditUserFormModal}
+      />
+      <ModalConFirm
+        show={isShowModalDelete}
+        handleClose={handleClose}
+        dataUserDelete={dataUserDelete}
+        handleDeleteUserFormModal={handleDeleteUserFormModal}
       />
     </>
   );

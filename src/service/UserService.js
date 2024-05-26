@@ -12,4 +12,7 @@ const loginApi = (email, password) => {
 const putUpdateUser = (name, job) => {
   return axios.put("/api/users/", { name, job });
 };
-export { fectchAllUser, postCreateUser, loginApi, putUpdateUser };
+const deleteUser = (id) => {
+  return axios.delete(`/api/users/${id}`);
+};
+export { fectchAllUser, postCreateUser, loginApi, putUpdateUser, deleteUser };
