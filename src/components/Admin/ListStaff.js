@@ -3,20 +3,33 @@ import Table from "react-bootstrap/Table";
 import { fectchAllUser } from "../../service/UserService";
 import ReactPaginate from "react-paginate";
 import ModalAddNew from "./ModalAddNew";
-
+import ModalEditUser from "./ModalEditUser";
+import _ from "lodash";
 const ListStaff = (props) => {
   const [listUser, setListUser] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const [dataUserEdit, setDateUserEdit] = useState({});
   const handleClose = () => {
     setIsShowModalAddNew(false);
+    setIsShowModalEdit(false);
   };
   const handleUpdateTable = (user) => {
     setListUser([user, ...listUser]);
   };
+  const handleEditUser = (user) => {
+    setDateUserEdit(user);
+    setIsShowModalEdit(true);
+  };
+  const handleEditUserFormModal = (user) => {
+    let cloneListUser = _.cloneDeep(listUser);
+    let index = listUser.findIndex((item) => item.id === user.id);
+    cloneListUser[index].first_name = user.first_name;
+    setListUser(cloneListUser);
+  };
   useEffect(() => {
-    //call api
     getUser();
   }, []);
 
@@ -52,6 +65,7 @@ const ListStaff = (props) => {
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -64,6 +78,15 @@ const ListStaff = (props) => {
                   <td>{item.email}</td>
                   <td>{item.first_name}</td>
                   <td>{item.last_name}</td>
+                  <td>
+                    <button
+                      className="btn btn-warning mx-3"
+                      onClick={() => handleEditUser(item)}
+                    >
+                      Edit
+                    </button>
+                    <button className="btn btn-danger">Delete</button>
+                  </td>
                 </tr>
               );
             })}
@@ -94,6 +117,12 @@ const ListStaff = (props) => {
         show={isShowModalAddNew}
         handleClose={handleClose}
         handleUpdateTable={handleUpdateTable}
+      />
+      <ModalEditUser
+        show={isShowModalEdit}
+        dataUserEdit={dataUserEdit}
+        handleClose={handleClose}
+        handleEditUserFormModal={handleEditUserFormModal}
       />
     </>
   );
