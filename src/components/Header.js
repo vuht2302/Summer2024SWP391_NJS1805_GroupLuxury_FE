@@ -3,7 +3,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 import { UserContext } from "../Context/UserContext";
-
+import UserProfile from "./UserProfile";
 export default function Header() {
   const { logout, user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -67,9 +67,14 @@ export default function Header() {
                     id="basic-nav-dropdown"
                   >
                     {user && user.auth ? (
-                      <NavDropdown.Item onClick={() => handleLogout()}>
-                        LogOut
-                      </NavDropdown.Item>
+                      <>
+                        <NavLink to="/UserProfile" className="dropdown-item">
+                          Profile
+                        </NavLink>
+                        <NavDropdown.Item onClick={() => handleLogout()}>
+                          LogOut
+                        </NavDropdown.Item>
+                      </>
                     ) : (
                       <NavLink to="/Login" className="dropdown-item">
                         Login

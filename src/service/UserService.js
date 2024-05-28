@@ -6,8 +6,8 @@ const fectchAllUser = (page) => {
 const postCreateUser = (name, job) => {
   return axios.post("/api/users", { name, job });
 };
-const loginApi = (email, password) => {
-  return axios.post("/api/login", { email, password });
+const loginApi = (username, password) => {
+  return axios.post("api/user/login", { username, password });
 };
 const putUpdateUser = (name, job) => {
   return axios.put("/api/users/", { name, job });
