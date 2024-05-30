@@ -7,4 +7,4 @@ Project_FrontEnd
 - Lý Văn Mỹ
 - Ngô Thanh Trí
 
-  https://docs.google.com/document/d/1-yokcKjoMdmPBpsvSP7zEBIQCZu9sr4--pgicJODfZ4/edit
+template RDS Document group Luxury: https://docs.google.com/document/d/1yVsHpc3AXuXr5z9uljs1__yLxqjLoPNR/edit
