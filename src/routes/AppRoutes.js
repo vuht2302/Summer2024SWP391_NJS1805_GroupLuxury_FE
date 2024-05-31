@@ -8,7 +8,7 @@ import Checkout from "../component/CheckOut";
 import { Route, Routes } from "react-router-dom";
 import Login from "../component/Login";
 import Register from "../component/Register";
-
+import StaffPage from "../component/StaffPage";
 const AppRoutes = () => {
   return (
     <>
@@ -22,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/Shopdetails" element={<ShopDetails />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/StaffPage" element={<StaffPage />} />
       </Routes>
     </>
   );
