@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+<<<<<<< HEAD
 In the project directory, you can run:
 
 ### `npm start`
@@ -68,3 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+template RDS Document group Luxury: https://docs.google.com/document/d/1yVsHpc3AXuXr5z9uljs1__yLxqjLoPNR/edit
+>>>>>>> a1b09078a08ebbac9663036064e88296c9a86c38
