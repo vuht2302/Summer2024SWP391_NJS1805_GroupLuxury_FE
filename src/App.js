@@ -1,11 +1,10 @@
-import { useLocation } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./component/Header";
+import AppRoutes from "./routes/AppRoutes";
+import Footer from "./component/Footer";
 
+import { useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./Context/UserContext";
-
-import AppRoutes from "./routes/AppRoutes";
 function App() {
   const location = useLocation();
 
@@ -17,12 +16,13 @@ function App() {
     "/AdminHome",
     "/Login",
     "/UserProfile",
+    "/Product",
   ];
   const { user, loginContext } = useContext(UserContext);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       loginContext(
-        localStorage.getItem("email"),
+        localStorage.getItem("username"),
         localStorage.getItem("token")
       );
     }
@@ -30,7 +30,6 @@ function App() {
   const shouldRenderHeaderFooter = !noHeaderFooterPaths.includes(
     location.pathname
   );
-
   return (
     <div className="App">
       {shouldRenderHeaderFooter && <Header />}

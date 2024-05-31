@@ -1,25 +1,23 @@
 import React from "react";
 
 // @function  UserContext
-const UserContext = React.createContext({ email: "", auth: false });
+const UserContext = React.createContext({ username: "", auth: false });
 
 // @function  UserProvider
 // Create function to provide UserContext
 const UserProvider = ({ children }) => {
-  const [user, setUser] = React.useState({ email: "", auth: false });
-
-  const loginContext = (email, token) => {
+  const [user, setUser] = React.useState({ username: "", auth: false });
+  const loginContext = (username, token) => {
     setUser((user) => ({
-      email: email,
+      username: username,
       auth: true,
     }));
     localStorage.setItem("token", token);
-    localStorage.setItem("email", email);
+    localStorage.setItem("username", username);
   };
-
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("email");
+    localStorage.removeItem("username");
     setUser((user) => ({
       email: "",
       auth: false,
