@@ -13,10 +13,11 @@ function App() {
     "/AddProduct",
     "/DashBoard",
     "/ManagerStaff",
-    "/AdminHome",
+    "/AdminMain",
     "/Login",
     "/UserProfile",
     "/Product",
+    "/AdminMain/ManageProduct",
   ];
   const { user, loginContext } = useContext(UserContext);
   useEffect(() => {

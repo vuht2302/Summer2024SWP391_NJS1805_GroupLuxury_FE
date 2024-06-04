@@ -1,5 +1,57 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
+// Styled components
+const StaffPageContainer = styled.div`
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f7dc6f; /* yellow luxurious theme */
+`;
+
+const Container = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+`;
+
+const LeftSection = styled.div`
+  width: 40%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+`;
+
+const RightSection = styled.div`
+  width: 55%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+`;
+
+const StyledUl = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const StyledLi = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+`;
+
+const LiImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+`;
+
+// Component
 function StaffPage() {
   const [cart, setCart] = useState([
     { id: 1, name: "Gold Ring", price: 100, quantity: 2, image: "ring.jpg" },
@@ -36,20 +88,20 @@ function StaffPage() {
   };
 
   return (
-    <div className="staff-page">
-      <div className="container">
-        <div className="left-section">
+    <StaffPageContainer>
+      <Container>
+        <LeftSection>
           <h2>Shopping Cart Information</h2>
-          <ul>
+          <StyledUl>
             {cart.map((item) => (
-              <li key={item.id}>
-                <img src={item.image} alt={item.name} />
+              <StyledLi key={item.id}>
+                <LiImage src={item.image} alt={item.name} />
                 <span>{item.name}</span>
                 <span>Quantity: {item.quantity}</span>
                 <span>Price: ${item.price * item.quantity}</span>
-              </li>
+              </StyledLi>
             ))}
-          </ul>
+          </StyledUl>
           <p>
             Total Amount: {cart.reduce((acc, item) => acc + item.quantity, 0)}
           </p>
@@ -57,8 +109,8 @@ function StaffPage() {
             Total Price: $
             {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
           </p>
-        </div>
-        <div className="right-section">
+        </LeftSection>
+        <RightSection>
           <h2>Customer Informations</h2>
           <form>
             <label>
@@ -134,9 +186,9 @@ function StaffPage() {
             </label>
           </form>
           <button onClick={handleOrder}>Order</button>
-        </div>
-      </div>
-    </div>
+        </RightSection>
+      </Container>
+    </StaffPageContainer>
   );
 }
 

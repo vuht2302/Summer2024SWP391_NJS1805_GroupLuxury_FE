@@ -97,10 +97,9 @@ export default function Department() {
                 }}
               >
                 <div className="hero__text">
-                  <span>FRUIT FRESH</span>
+                  <span>Jewelry Shop</span>
                   <h2>
-                    Vegetable <br />
-                    100% Organic
+                    New Collection <br />
                   </h2>
                   <p>Free Pickup and Delivery Available</p>
                   <a href="#" className="primary-btn">

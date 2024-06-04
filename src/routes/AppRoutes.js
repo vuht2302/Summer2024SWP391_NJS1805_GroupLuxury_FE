@@ -9,6 +9,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../component/Login";
 import Register from "../component/Register";
 import StaffPage from "../component/StaffPage";
+import AdminMain from "../component/admin/AdminMain";
+import ManageProduct from "../component/admin/ManageProduct";
 const AppRoutes = () => {
   return (
     <>
@@ -23,6 +25,8 @@ const AppRoutes = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/StaffPage" element={<StaffPage />} />
+        <Route path="/AdminMain/ManageProduct" element={<ManageProduct />} />
+        <Route path="/AdminMain" element={<AdminMain />} />
       </Routes>
     </>
   );
