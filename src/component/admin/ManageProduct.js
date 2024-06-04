@@ -5,6 +5,7 @@ import NavBarAdmin from "./NavbarAdmin";
 import ReactPaginate from "react-paginate";
 import ModalAddNew from "./ModalAddNew";
 import { ToastContainer } from "react-toastify";
+import ModalConfirm from "./ModalConfirm";
 import ModalEditProduct from "./ModalEditProduct";
 import _ from "lodash";
 const ManageProduct = (props) => {
@@ -18,6 +19,8 @@ const ManageProduct = (props) => {
   const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [dataProductEdit, setDataProductEdit] = useState({});
+  const [dataProductDelete, setDataProductDelete] = useState({});
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const getProducts = async (page) => {
     // hung ket qua
     let res = await fetchAllProducts(page);
@@ -33,6 +36,7 @@ const ManageProduct = (props) => {
   const handleClose = () => {
     setIsShowModalAddNew(false);
     setIsShowModalEdit(false);
+    setIsShowModalDelete(false);
   };
   const handleUpdatetable = (product) => {
     setListProducts([product, ...listProducts]);
@@ -48,7 +52,10 @@ const ManageProduct = (props) => {
     setDataProductEdit(product);
     setIsShowModalEdit(true);
   };
-
+  const handleDeleteProduct = (product) => {
+    setIsShowModalDelete(true);
+    setDataProductDelete(product);
+  };
   return (
     <>
       <div id="wrapper">
@@ -331,69 +338,76 @@ const ManageProduct = (props) => {
                 </li>
               </ul>
             </nav>
-            <div className="my-3 d-flex justify-content-between">
-              <span>
-                <b>List Product</b>
-              </span>
-              <button
-                className="btn btn-success"
-                onClick={() => setIsShowModalAddNew(true)}
-              >
-                Add New Product
-              </button>
+            <div className="mx-5">
+              <div className="my-3 d-flex justify-content-between">
+                <span>
+                  <b>List Product</b>
+                </span>
+                <button
+                  className="btn btn-success"
+                  onClick={() => setIsShowModalAddNew(true)}
+                >
+                  Add New Product
+                </button>
+              </div>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {listProducts &&
+                    listProducts.length > 0 &&
+                    listProducts.map((item, index) => {
+                      return (
+                        <tr key={`product-${index}`}>
+                          <td>{item.id}</td>
+                          <td>{item.email}</td>
+                          <td>{item.last_name}</td>
+                          <td>{item.first_name}</td>
+                          <td>
+                            <button
+                              className="btn btn-warning mx-3"
+                              onClick={() => handleEditProduct(item)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn btn-danger"
+                              onClick={() => handleDeleteProduct(item)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </Table>
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="next  >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={totalPages}
+                previousLabel="< previos"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+              />
             </div>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Email</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listProducts &&
-                  listProducts.length > 0 &&
-                  listProducts.map((item, index) => {
-                    return (
-                      <tr key={`product-${index}`}>
-                        <td>{item.id}</td>
-                        <td>{item.email}</td>
-                        <td>{item.last_name}</td>
-                        <td>{item.first_name}</td>
-                        <td>
-                          <button
-                            className="btn btn-warning mx-3"
-                            onClick={() => handleEditProduct(item)}
-                          >
-                            Edit
-                          </button>
-                          <button className="btn btn-danger">Delete</button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </Table>
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="next  >"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={totalPages}
-              previousLabel="< previos"
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              previousLinkClassName="page-link"
-              nextClassName="page-item"
-              nextLinkClassName="page-link"
-              breakClassName="page-item"
-              breakLinkClassName="page-link"
-              containerClassName="pagination"
-              activeClassName="active"
-            />
             <ModalAddNew
               show={isShowModalAddNew}
               handleClose={handleClose}
@@ -404,6 +418,11 @@ const ManageProduct = (props) => {
               dataProductEdit={dataProductEdit}
               handleClose={handleClose}
               handleEditProductFromModal={handleEditProductFromModal}
+            />
+            <ModalConfirm
+              show={isShowModalDelete}
+              handleClose={handleClose}
+              dataProductDelete={dataProductDelete}
             />
           </div>
         </div>
