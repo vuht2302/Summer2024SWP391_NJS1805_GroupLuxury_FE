@@ -9,6 +9,14 @@ const postCreateProduct = (name, job) => {
   return axios.post("/api/users", { name, job }); // link api va data muon gui di
 };
 const patchUpdateProduct = (name, job) => {
-  return axios.patch("/api/users/2", { name, job });
+  return axios.patch("/api/users/", { name, job });
 };
-export { fetchAllProducts, postCreateProduct, patchUpdateProduct };
+const deleteProduct = (id) => {
+  return axios.delete(`/api/users/${id}`);
+};
+export {
+  fetchAllProducts,
+  postCreateProduct,
+  patchUpdateProduct,
+  deleteProduct,
+};

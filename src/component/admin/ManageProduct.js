@@ -56,6 +56,13 @@ const ManageProduct = (props) => {
     setIsShowModalDelete(true);
     setDataProductDelete(product);
   };
+  const handleDeleteProductFormModal = (product) => {
+    let cloneListProduct = _.cloneDeep(listProducts);
+    cloneListProduct = cloneListProduct.filter(
+      (item) => item.id !== product.id
+    );
+    setListProducts(cloneListProduct);
+  };
   return (
     <>
       <div id="wrapper">
@@ -423,6 +430,7 @@ const ManageProduct = (props) => {
               show={isShowModalDelete}
               handleClose={handleClose}
               dataProductDelete={dataProductDelete}
+              handleDeleteProductFormModal={handleDeleteProductFormModal}
             />
           </div>
         </div>

@@ -1,8 +1,20 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { deleteProduct } from "../../service/ProductService";
+import { toast } from "react-toastify";
 const ModalConfirm = (props) => {
-  const { show, handleClose, dataProductDelete } = props;
-  const confirmDelete = () => {};
+  const { show, handleClose, dataProductDelete, handleDeleteProductFormModal } =
+    props;
+  const confirmDelete = async () => {
+    let res = await deleteProduct(dataProductDelete.id);
+    if (res && +res.statusCode === 204) {
+      toast.success("Delete Product Succeed");
+      handleClose();
+      handleDeleteProductFormModal(dataProductDelete);
+    } else {
+      toast.error("Error Delete Product");
+    }
+  };
   return (
     <>
       <Modal
