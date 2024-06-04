@@ -4,7 +4,9 @@ import { fetchAllProducts } from "../../service/ProductService";
 import NavBarAdmin from "./NavbarAdmin";
 import ReactPaginate from "react-paginate";
 import ModalAddNew from "./ModalAddNew";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import ModalEditProduct from "./ModalEditProduct";
+
 const ManageProduct = (props) => {
   const [listProducts, setListProducts] = useState([]);
   useEffect(() => {
@@ -14,6 +16,8 @@ const ManageProduct = (props) => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const [dataProductEdit, setDataProductEdit] = useState({});
   const getProducts = async (page) => {
     // hung ket qua
     let res = await fetchAllProducts(page);
@@ -28,10 +32,17 @@ const ManageProduct = (props) => {
   };
   const handleClose = () => {
     setIsShowModalAddNew(false);
+    setIsShowModalEdit(false);
   };
   const handleUpdatetable = (product) => {
     setListProducts([product, ...listProducts]);
   };
+  const handleEditProduct = (product) => {
+    //truyen product muon edit
+    setDataProductEdit(product);
+    setIsShowModalEdit(true);
+  };
+
   return (
     <>
       <div id="wrapper">
@@ -332,6 +343,7 @@ const ManageProduct = (props) => {
                   <th>Email</th>
                   <th>First Name</th>
                   <th>Last Name</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -344,6 +356,15 @@ const ManageProduct = (props) => {
                         <td>{product.email}</td>
                         <td>{product.last_name}</td>
                         <td>{product.first_name}</td>
+                        <td>
+                          <button
+                            className="btn btn-warning mx-3"
+                            onClick={() => handleEditProduct(product)}
+                          >
+                            Edit
+                          </button>
+                          <button className="btn btn-danger">Delete</button>
+                        </td>
                       </tr>
                     );
                   })}
@@ -371,6 +392,11 @@ const ManageProduct = (props) => {
               show={isShowModalAddNew}
               handleClose={handleClose}
               handleUpdatetable={handleUpdatetable}
+            />
+            <ModalEditProduct
+              show={isShowModalEdit}
+              dataProductEdit={dataProductEdit}
+              handleClose={handleClose}
             />
           </div>
         </div>

@@ -1,8 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import "./css/sb-admin-2.min.css";
+import "./vendor/fontawesome-free/css/all.min.css";
 
 function NavBarAdmin() {
   return (
