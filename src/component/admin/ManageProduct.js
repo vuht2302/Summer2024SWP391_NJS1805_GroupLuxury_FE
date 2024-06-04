@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import ModalAddNew from "./ModalAddNew";
 import { ToastContainer } from "react-toastify";
 import ModalEditProduct from "./ModalEditProduct";
-
+import _ from "lodash";
 const ManageProduct = (props) => {
   const [listProducts, setListProducts] = useState([]);
   useEffect(() => {
@@ -36,6 +36,12 @@ const ManageProduct = (props) => {
   };
   const handleUpdatetable = (product) => {
     setListProducts([product, ...listProducts]);
+  };
+  const handleEditProductFromModal = (product) => {
+    let cloneListProduct = _.cloneDeep(listProducts);
+    let index = listProducts.findIndex((item) => item.id === product.id);
+    cloneListProduct[index].first_name = product.first_name;
+    setListProducts(cloneListProduct);
   };
   const handleEditProduct = (product) => {
     //truyen product muon edit
@@ -349,17 +355,17 @@ const ManageProduct = (props) => {
               <tbody>
                 {listProducts &&
                   listProducts.length > 0 &&
-                  listProducts.map((product, index) => {
+                  listProducts.map((item, index) => {
                     return (
                       <tr key={`product-${index}`}>
-                        <td>{product.id}</td>
-                        <td>{product.email}</td>
-                        <td>{product.last_name}</td>
-                        <td>{product.first_name}</td>
+                        <td>{item.id}</td>
+                        <td>{item.email}</td>
+                        <td>{item.last_name}</td>
+                        <td>{item.first_name}</td>
                         <td>
                           <button
                             className="btn btn-warning mx-3"
-                            onClick={() => handleEditProduct(product)}
+                            onClick={() => handleEditProduct(item)}
                           >
                             Edit
                           </button>
@@ -397,6 +403,7 @@ const ManageProduct = (props) => {
               show={isShowModalEdit}
               dataProductEdit={dataProductEdit}
               handleClose={handleClose}
+              handleEditProductFromModal={handleEditProductFromModal}
             />
           </div>
         </div>

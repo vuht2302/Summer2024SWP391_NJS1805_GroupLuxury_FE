@@ -3,11 +3,24 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { postCreateProduct } from "../../service/ProductService";
 import { toast } from "react-toastify";
+import { patchUpdateProduct } from "../../service/ProductService";
 const ModalEditProduct = (props) => {
-  const { show, handleClose, dataProductEdit } = props;
+  const { show, handleClose, dataProductEdit, handleEditProductFromModal } =
+    props;
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
-  const handleEditProduct = () => {};
+  const handleEditProduct = async () => {
+    let res = await patchUpdateProduct(name, job); // khi click vao thi truyen 2 tham so name va job
+    if (res && res.updatedAt) {
+      //success
+      handleEditProductFromModal({
+        first_name: name, // lay name modal dang kiem soat
+        id: dataProductEdit.id,
+      });
+      handleClose();
+      toast.success("Update new product succed!");
+    }
+  };
   useEffect(() => {
     if (show) {
       // check khi nao modal mo len ms chay
@@ -15,7 +28,6 @@ const ModalEditProduct = (props) => {
     }
   }, [dataProductEdit]); // chay khi co su thay doi cua dataproduct
 
-  console.table(">> Check props ", dataProductEdit);
   return (
     <>
       <Modal show={show} onHide={handleClose}>

@@ -5,7 +5,10 @@ const fetchAllProducts = (page) => {
   return axios.get(`/api/users?page=${page}`);
 };
 const postCreateProduct = (name, job) => {
+  // truyen vao cai api yc
   return axios.post("/api/users", { name, job }); // link api va data muon gui di
 };
-
-export { fetchAllProducts, postCreateProduct };
+const patchUpdateProduct = (name, job) => {
+  return axios.patch("/api/users/2", { name, job });
+};
+export { fetchAllProducts, postCreateProduct, patchUpdateProduct };
